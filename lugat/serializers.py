@@ -3,7 +3,7 @@ from .models import Lugat
 
 class LugatListSerializer(ModelSerializer):
     class Meta:
-        fields = ['id', 'name', 'unique_identificator']
+        fields = ['id', 'name', 'unique_identificator', 'language']
         model = Lugat
 
 class LugatDetailSerializer(ModelSerializer):
