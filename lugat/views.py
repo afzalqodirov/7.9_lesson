@@ -23,17 +23,20 @@ def lugat_list_view(request):
 @swagger_auto_schema(method='POST', request_body=LugatDetailSerializer)
 @api_view(['POST'])
 def lugat_create_view(request):
+    if not request.user.is_authenticated:return Response({'message':'You are not logged in!'})
     serializer = LugatDetailSerializer(data=request.data)
     if serializer.is_valid():serializer.save(); return Response(serializer.data)
     return Response(serializer.errors)
 
 @api_view()
 def lugat_retrieve_view(request, id):
+    if not request.user.is_authenticated:return Response({'message':'You are not logged in!'})
     return Response(LugatDetailSerializer(get_object_or_404(Lugat, pk=id)).data)
 
 @swagger_auto_schema(methods=['PUT', 'PATCH'], request_body=LugatDetailSerializer)
 @api_view(['PUT', 'PATCH'])
 def lugat_update_view(request, id):
+    if not request.user.is_authenticated:return Response({'message':'You are not logged in!'})
     serializer = LugatDetailSerializer(get_object_or_404(Lugat, pk=id), data=request.data, partial=True)
     if serializer.is_valid():serializer.save();return Response(serializer.data)
     return Response(serializer.errors)
