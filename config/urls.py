@@ -14,3 +14,10 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view()),
     path('', schema_view.with_ui('swagger')),
 ]
+
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
