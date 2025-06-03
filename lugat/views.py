@@ -23,8 +23,9 @@ def lugat_list_view(request):
 
     paginator = Paginator(queryset, 20)
     page = request.GET.get('page')
+    if not page:page=1
     try:current_page = paginator.page(page)
-    except:current_page = paginator.page(1)
+    except:return Response({'message':f'The {page}-page not found, there are only {paginator.num_pages} page(s)'})
     return Response({
         'count':paginator.count,
         'num_pages':paginator.num_pages,

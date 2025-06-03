@@ -13,8 +13,9 @@ class Lugat(models.Model):
     # 1 -> Beton and Бетон and Concrete
     unique_identificator = models.PositiveIntegerField() 
 
-    # for example (0 -> Russian) or (1 -> Uzbek in latin)
-    language = models.IntegerField() 
+    # for example (1 -> Russian) or (2 -> Uzbek in latin)
+    choices = [(1, 'Russian'), (2,'Uzbek-latin'), (3, 'Uzbek-kiril'), (3, 'English')]
+    language = models.IntegerField(choices=choices) 
 
     def __str__(self):return self.name
 
